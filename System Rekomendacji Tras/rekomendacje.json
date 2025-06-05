@@ -1,0 +1,134 @@
+[
+  {
+    "id": 4,
+    "nazwa": "Ścieżka Długosza",
+    "region": "Pieniny",
+    "czas_h": 2.83,
+    "komfort": 82.4,
+    "kategorie": [
+      "Rodzinne"
+    ]
+  },
+  {
+    "id": 5,
+    "nazwa": "Szlak do Wąwozu Homole",
+    "region": "Pieniny",
+    "czas_h": 1.15,
+    "komfort": 82.4,
+    "kategorie": [
+      "Rodzinne"
+    ]
+  },
+  {
+    "id": 6,
+    "nazwa": "Błędne Skały",
+    "region": "Góry Stołowe",
+    "czas_h": 1.25,
+    "komfort": 80.7,
+    "kategorie": [
+      "Rodzinne"
+    ]
+  },
+  {
+    "id": 9,
+    "nazwa": "Spacer po Równi Krupowej",
+    "region": "Tatry",
+    "czas_h": 0.96,
+    "komfort": 85.8,
+    "kategorie": [
+      "Rodzinne"
+    ]
+  },
+  {
+    "id": 15,
+    "nazwa": "Szlak do Zamku Czocha",
+    "region": "Dolny Śląsk",
+    "czas_h": 1.81,
+    "komfort": 81.4,
+    "kategorie": [
+      "Rodzinne"
+    ]
+  },
+  {
+    "id": 16,
+    "nazwa": "Ścieżka edukacyjna w Kampinoskim Parku Narodowym",
+    "region": "Mazowieckie",
+    "czas_h": 2.62,
+    "komfort": 85.4,
+    "kategorie": []
+  },
+  {
+    "id": 18,
+    "nazwa": "Trasa nadmorska w Łebie",
+    "region": "Pomorze",
+    "czas_h": 3.02,
+    "komfort": 83.2,
+    "kategorie": []
+  },
+  {
+    "id": 1,
+    "nazwa": "Dolina Kościeliska",
+    "region": "Tatry",
+    "czas_h": 3.11,
+    "komfort": 85.8,
+    "kategorie": [
+      "Rodzinne",
+      "Widokowe"
+    ]
+  },
+  {
+    "id": 3,
+    "nazwa": "Szlak do Morskiego Oka",
+    "region": "Tatry",
+    "czas_h": 3.69,
+    "komfort": 85.8,
+    "kategorie": [
+      "Rodzinne",
+      "Widokowe"
+    ]
+  },
+  {
+    "id": 13,
+    "nazwa": "Ścieżka przez Beskid Sądecki",
+    "region": "Beskidy",
+    "czas_h": 5.12,
+    "komfort": 83.6,
+    "kategorie": [
+      "Widokowe"
+    ]
+  },
+  {
+    "id": 19,
+    "nazwa": "Szlak na Ślężę",
+    "region": "Sudety",
+    "czas_h": 4.32,
+    "komfort": 84.5,
+    "kategorie": [
+      "Rodzinne",
+      "Widokowe"
+    ]
+  },
+  {
+    "id": 8,
+    "nazwa": "Trasa na Kasprowy Wierch",
+    "region": "Tatry",
+    "czas_h": 6.05,
+    "komfort": 85.8,
+    "kategorie": [
+      "Widokowe",
+      "Sportowe",
+      "Ekstremalne"
+    ]
+  },
+  {
+    "id": 11,
+    "nazwa": "Ścieżka na Śnieżkę",
+    "region": "Karkonosze",
+    "czas_h": 4.72,
+    "komfort": 87.3,
+    "kategorie": [
+      "Widokowe",
+      "Sportowe"
+    ]
+  }
+]
