@@ -1,0 +1,31 @@
+from collections import defaultdict
+from calendar import month_name
+from src.models.dane_pogodowe import DanePogodowe
+
+class AnalizatorPogodowy:
+    def __init__(self, dane: list[DanePogodowe]):
+        self._dane = dane
+
+    def statystyki_dla_lokacji(self, lok: str) -> dict:
+        filtrowane = [d for d in self._dane if d.lokalizacja == lok]
+        if not filtrowane:
+            return {}
+        avg_temp = sum(d.temp_srednia for d in filtrowane) / len(filtrowane)
+        deszczowe = sum(1 for d in filtrowane if d.czy_deszczowy())
+        sloneczne = sum(1 for d in filtrowane if d.czy_sloneczny())
+        return {
+            "srednia_temp": avg_temp,
+            "dni_deszczowe": deszczowe,
+            "dni_sloneczne": sloneczne,
+        }
+
+    def najlepsze_okresy(self, lok: str, top_n: int = 3) -> list[str]:
+        miesiace = defaultdict(list)
+        for d in self._dane:
+            if d.lokalizacja == lok:
+                miesiace[d.data.month].append(d.oblicz_indeks_komfortu())
+        srednie = []
+        for m, vals in miesiace.items():
+            srednie.append((m, sum(vals)/len(vals)))
+        srednie.sort(key=lambda x: x[1], reverse=True)
+        return [month_name[m] for m, _ in srednie[:top_n]]
