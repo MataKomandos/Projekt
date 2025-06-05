@@ -1,0 +1,24 @@
+import csv
+from src.models.trasy import Trasa
+
+class MenadzerDanychTras:
+    def wczytaj_trasy(self, sciezka: str) -> list[Trasa]:
+        trasy = []
+        with open(sciezka, newline='', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                trasy.append(Trasa(
+                    id=int(row['id']),
+                    nazwa=row['name'],
+                    region=row['region'],
+                    start_lat=float(row['start_lat']),
+                    start_lon=float(row['start_lon']),
+                    end_lat=float(row['end_lat']),
+                    end_lon=float(row['end_lon']),
+                    dlugosc_km=float(row['length_km']),
+                    przewyzszenie_m=float(row['elevation_gain']),
+                    trudnosc=int(row['difficulty']),
+                    typ_terenu=row['terrain_type'],
+                    tagi=row['tags'].split(','),
+                ))
+        return trasy
