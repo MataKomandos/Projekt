@@ -1,0 +1,93 @@
+from typing import List, Tuple
+
+class Trasa:
+    def __init__(
+        self,
+        id: int,
+        nazwa: str,
+        region: str,
+        start_lat: float,
+        start_lon: float,
+        end_lat: float,
+        end_lon: float,
+        dlugosc_km: float,
+        przewyzszenie_m: float,
+        trudnosc: int,
+        typ_terenu: str,
+        tagi: List[str],
+    ):
+        self._id = id
+        self._nazwa = nazwa
+        self._region = region
+        self._start = (start_lat, start_lon)
+        self._end = (end_lat, end_lon)
+        self._dlugosc_km = dlugosc_km
+        self._przewyzszenie_m = przewyzszenie_m
+        self._trudnosc = trudnosc
+        self._typ_terenu = typ_terenu
+        self._tagi = tagi
+
+    @property
+    def id(self) -> int:
+        return self._id
+
+    @property
+    def nazwa(self) -> str:
+        return self._nazwa
+
+    @property
+    def dlugosc_km(self) -> float:
+        return self._dlugosc_km
+
+    @property
+    def przewyzszenie_m(self) -> float:
+        return self._przewyzszenie_m
+
+    @property
+    def trudnosc(self) -> int:
+        return self._trudnosc
+
+    @property
+    def typ_terenu(self) -> str:
+        return self._typ_terenu
+
+    @property
+    def tagi(self) -> List[str]:
+        return self._tagi
+
+    def oblicz_srodek_trasy(self) -> Tuple[float, float]:
+        lat = (self._start[0] + self._end[0]) / 2
+        lon = (self._start[1] + self._end[1]) / 2
+        return (lat, lon)
+
+    def szacuj_czas_przejscia(self, predkosci_terenowe: dict) -> float:
+        # Podstawowy czas według długości trasy i prędkości terenu
+        predkosc = predkosci_terenowe.get(self._typ_terenu, 4.0)  # km/h domyślnie 4 km/h
+        czas_podstawowy = self._dlugosc_km / predkosc
+        # Dodatek czasu za przewyższenie: +1h na każde 600m w górę
+        czas_wzwyzszenie = (self._przewyzszenie_m / 600.0)
+        # Mnożnik za trudność: od 1.0 (łatwe) do 1.8 (bardzo trudne)
+        multiplier = 1.0 + (self._trudnosc - 1) * 0.2
+        return (czas_podstawowy + czas_wzwyzszenie) * multiplier
+
+    def kategoryzuj(self) -> List[str]:
+        kategorie = []
+        # Rodzinne: trudność <=2 i długość <=10km
+        if self._trudnosc <= 2 and self._dlugosc_km <= 10:
+            kategorie.append("Rodzinne")
+        # Widokowe: tagi zawierają słowa kluczowe lub przewyższenie >300m
+        if any(tag in ["waterfalls", "vista", "lake"] for tag in self._tagi) or self._przewyzszenie_m > 300:
+            kategorie.append("Widokowe")
+        # Sportowe: trudność >=3 lub długość >=20km
+        if self._trudnosc >= 3 or self._dlugosc_km >= 20:
+            kategorie.append("Sportowe")
+        # Ekstremalne: trudność >=4 lub przewyższenie >=1000m
+        if self._trudnosc >= 4 or self._przewyzszenie_m >= 1000:
+            kategorie.append("Ekstremalne")
+        return kategorie
+
+    def dopasowana_do_preferencji(self, pref) -> bool:
+        return (
+            self._trudnosc <= pref.max_trudnosc and
+            self._dlugosc_km <= pref.max_dlugosc_km
+        )
